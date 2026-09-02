@@ -1,34 +1,67 @@
-# Logs
-logs
-*.log
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-pnpm-debug.log*
-lerna-debug.log*
-
-node_modules
-dist
-dist-ssr
-.output
-.vinxi
-.tanstack/**
-.nitro
+# ---------------------------------------------------------------
+# Segredos - NUNCA versionar
+# ---------------------------------------------------------------
+.env
+.env.*
+!.env.example
 *.local
-
-# Wrangler / Cloudflare
-.wrangler/
 .dev.vars
 
-# Editor directories and files
+# ---------------------------------------------------------------
+# Memorias pessoais - o conteudo de /data e privado.
+# Apenas a estrutura de pastas (.gitkeep) vai para o repositorio.
+# ---------------------------------------------------------------
+/data/**
+!/data/**/
+!/data/**/.gitkeep
+
+# ---------------------------------------------------------------
+# Python
+# ---------------------------------------------------------------
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+dist/
+develop-eggs/
+downloads/
+eggs/
+.eggs/
+sdist/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Ambientes virtuais
+venv/
+.venv/
+env/
+ENV/
+
+# Testes e cobertura
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.coverage
+.coverage.*
+htmlcov/
+coverage.xml
+.tox/
+.nox/
+
+# ---------------------------------------------------------------
+# Editores e SO
+# ---------------------------------------------------------------
 .vscode/*
 !.vscode/extensions.json
-.idea
+.idea/
 .DS_Store
-*.suo
-*.ntvs*
-*.njsproj
-*.sln
-*.sw?
-test-results/
-playwright-report/
+Thumbs.db
+desktop.ini
+*.swp
+*.swo

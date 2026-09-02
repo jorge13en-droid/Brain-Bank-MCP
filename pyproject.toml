@@ -1,0 +1,49 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "brain-bank-mcp"
+version = "0.2.0"
+description = "Servidor MCP que da memoria persistente para qualquer IA."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "Jorge", email = "jorge13en@gmail.com" }]
+keywords = ["mcp", "model-context-protocol", "memory", "ai", "claude"]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Intended Audience :: Developers",
+  "License :: OSI Approved :: MIT License",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Topic :: Software Development :: Libraries :: Python Modules",
+]
+dependencies = ["mcp>=1.2.0"]
+
+[project.optional-dependencies]
+dev = ["pytest>=8.0", "ruff>=0.6"]
+
+[project.scripts]
+brain-bank-mcp = "brain_bank.server:main"
+
+[project.urls]
+Homepage = "https://github.com/jorge13en-droid/Brain-Bank-MCP"
+Issues = "https://github.com/jorge13en-droid/Brain-Bank-MCP/issues"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/brain_bank"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+addopts = "-q"
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM"]

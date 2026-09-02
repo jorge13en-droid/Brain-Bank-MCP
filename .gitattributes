@@ -1,0 +1,14 @@
+# Normaliza quebras de linha: LF no repositorio, nativo no disco.
+* text=auto eol=lf
+
+*.py   text diff=python
+*.md   text
+*.toml text
+*.yml  text
+*.yaml text
+
+# Binarios
+*.png binary
+*.jpg binary
+*.pdf binary
+*.ico binary

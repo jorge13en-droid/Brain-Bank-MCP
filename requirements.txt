@@ -1,1 +1,2 @@
-mcp
+# Dependencias de execucao. Para desenvolvimento use: pip install -e ".[dev]"
+mcp>=1.2.0   # compativel com a 1.x (FastMCP) e a 2.x (MCPServer)
