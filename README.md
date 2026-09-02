@@ -1,26 +1,54 @@
-# Brain Bank
+# 🧠 Brain Bank MCP
 
-eu quero criar um aplicativo chamado  brain ou outro nome que relembra pasta. ele vai funcionar como uma memória na qual podemos colocar todas as nossas informações e essa memória será injetada nas Inteligências artificiais. O que acontece hoje é que toda hora temos que abir uma conversa nova e a memória é perdida. imagine se essa memória já estivesse estabelecida.
+**Nunca mais comece uma conversa com IA do zero.**
 
-This project was built with [Lovable](https://lovable.dev).
+O Brain Bank é um servidor de **Model Context Protocol (MCP)** que funciona como uma memória persistente para Inteligências Artificiais. Em vez de explicar tudo de novo a cada nova conversa, você salva suas informações uma única vez e as injeta como contexto em qualquer IA.
 
-**Live app**: https://ai-brain-share.lovable.app
+---
 
-## Build with Lovable
+## 🤔 O Problema
+Hoje, ao usar IAs, enfrentamos a "amnésia digital". Cada conversa nova é uma página em branco. Perdemos tempo reexplicando projetos, gostos, decisões e aprendizados.
 
-Continue developing this project in the [Lovable editor](https://lovable.dev/projects/ac65e982-15b3-4f64-9426-efd08531bdee).
+## 💡 A Solução
+O Brain Bank resolve isso. Ele organiza suas memórias em **pastas estruturadas** e as disponibiliza para qualquer IA compatível com MCP. Quando uma IA precisa de contexto, ela "puxa" a memória do banco.
 
-- **Ship faster**: describe what you want to build and Lovable handles the code.
-- **Stay in sync**: every change made in Lovable is committed straight to this repository.
-- **Full ownership**: this code is yours. Push to `main` on GitLab and your changes sync back into Lovable, ready for your next prompt.
+---
 
-## Development
+## 📂 Estrutura de Pastas
+As memórias são divididas em pastas dentro de `/data`:
 
-Prefer working locally? You need Node.js and npm — [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating).
+| Pasta         | Para que serve                                 |
+| ------------- | ---------------------------------------------- |
+| `projetos`    | Memórias sobre trabalhos e tarefas em andamento |
+| `pessoas`     | Informações sobre contatos e relacionamentos    |
+| `aprendizado` | Lições, artigos e conhecimentos adquiridos      |
+| `ideias`      | Brainstorms e pensamentos criativos             |
+| `contexto`    | Memória de curto prazo (o que está acontecendo) |
+| `instrucoes`  | Regras e preferências (estilo, tom de voz)      |
+| `fonte`       | Documentos brutos, PDFs e referências           |
 
-```sh
+---
+
+## 🚀 Recursos (O que ele faz?)
+- **Busca de Memória:** Permite que a IA procure arquivos específicos.
+- **Listagem de Pastas:** Mostra à IA quais pastas de contexto existem.
+- **Formato Markdown:** Memórias legíveis por humanos e máquinas.
+- **Arquitetura MCP:** Compatível com Claude Desktop, Slack Agents e outras IAs.
+
+---
+
+## 🛠️ Como Usar
+
+### 1. Pré-requisitos
+- Node.js (se for rodar o Frontend da Lovable)
+- Python 3.10+ (para o servidor MCP)
+- Uma IA compatível com MCP (ex: Claude Desktop)
+
+### 2. Instalação
+```bash
+# Clone o repositório
 git clone <this-repository-url>
 cd <repository-name>
-npm i
-npm run dev
-```
+
+# Instale as dependências do servidor MCP
+pip install -r requirements.txt
