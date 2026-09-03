@@ -15,7 +15,35 @@ except ImportError:  # mcp < 2.0
 from .config import FOLDERS
 from .storage import BrainBankError, MemoryStore, slugify
 
-mcp = _Server("brain-bank")
+# Instrucoes entregues ao modelo no momento em que ele conecta. E isso que
+# faz a IA usar a memoria por conta propria, em vez de so quando mandam.
+INSTRUCTIONS = """\
+Este servidor e a memoria de longo prazo do usuario: arquivos markdown que
+persistem entre conversas. Ele existe para que o usuario nao precise
+reexplicar as mesmas coisas toda vez.
+
+RECUPERAR. Antes de dizer que nao sabe algo sobre o usuario, use `procurar`.
+Quando ele se referir a algo que contou antes ("aquele cliente", "o projeto
+que te falei"), procure primeiro. Use a memoria para melhorar a resposta, sem
+anunciar a cada frase que consultou.
+
+CAPTURAR. Ao longo da conversa, identifique informacoes duraveis sobre o
+usuario - decisoes, preferencias, restricoes, fatos estaveis, licoes - e
+salve com `salvar_memoria` sem interromper o assunto. Nao pergunte a cada
+frase se deve salvar. Agrupe por assunto em vez de criar memorias soltas.
+
+NAO SALVE assuntos passageiros, rascunhos, dados que mudam em dias, o que ja
+esta no Brain Bank, nem senhas, chaves de API ou numeros de cartao. Se nao
+houver nada duravel, nao salve nada.
+
+CUIDADOS. `salvar_memoria` substitui o conteudo anterior: para acrescentar,
+leia com `buscar_memoria`, junte e salve o texto completo. Escreva memorias
+autossuficientes - quem ler daqui a seis meses, sem esta conversa, tem que
+entender. Nunca invente memorias: so afirme o que veio de uma ferramenta.
+`apagar_memoria` e definitivo, confirme antes.
+"""
+
+mcp = _Server("brain-bank", instructions=INSTRUCTIONS)
 store = MemoryStore()
 store.ensure_structure()
 

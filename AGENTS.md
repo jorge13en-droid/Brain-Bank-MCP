@@ -32,5 +32,8 @@ Nao ha frontend neste repositorio.
    porque some no cache do uvx a cada atualizacao.
 5. Antes de commitar: `ruff check . && ruff format --check . && pytest`.
 6. As ferramentas MCP tem nomes em portugues por decisao de produto. Mantenha.
+   O mesmo vale para `INSTRUCTIONS` em server.py: e o texto que o modelo
+   recebe ao conectar, e o que faz a IA usar a memoria sozinha. Ao mexer
+   nele, so cite ferramentas que existem - ha teste checando isso.
 7. Ao mexer na versao, edite so `src/brain_bank/__init__.py`: o `pyproject.toml`
    le dali. Mantenha em sincronia com `plugins/brain-bank/plugin.json`.

@@ -38,3 +38,17 @@ def test_listar_pastas_descreve_cada_pasta():
 def test_erro_de_pasta_invalida_vira_texto_amigavel():
     saida = server.buscar_memoria("financeiro", "qualquer")
     assert "Pasta invalida" in saida
+
+
+def test_servidor_entrega_instrucoes_ao_modelo():
+    """Sem isso a IA so usa a memoria quando mandam explicitamente."""
+    instrucoes = server.mcp.instructions
+    assert instrucoes, "o servidor precisa expor instructions"
+    for trecho in ("procurar", "salvar_memoria", "substitui o conteudo"):
+        assert trecho in instrucoes
+
+
+def test_instrucoes_citam_so_ferramentas_que_existem():
+    citadas = {nome for nome in FERRAMENTAS_ESPERADAS if f"`{nome}`" in server.mcp.instructions}
+    assert citadas, "as instrucoes deveriam citar ferramentas pelo nome"
+    assert citadas <= FERRAMENTAS_ESPERADAS

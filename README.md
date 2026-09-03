@@ -37,10 +37,20 @@ Você  ──▶  Claude / Cowork / agente próprio
               Brain Bank MCP
                       │
                       ▼
-              data/*.md  (seus arquivos, no seu disco)
+        ~/BrainBank/*.md  (seus arquivos, no seu disco)
 ```
 
 Sem banco de dados. Sem nuvem. Sem lock-in — é uma pasta de markdown.
+
+### Prefere na nuvem?
+
+Existe uma versão web do Brain Bank, com interface, busca e uma fila de
+aprovação para revisar o que a IA quis guardar antes de entrar no cofre:
+**[ai-brain-share.lovable.app](https://ai-brain-share.lovable.app)**.
+
+Os dois são independentes — este repositório é a versão local, em que os
+arquivos ficam na sua máquina e ninguém mais toca neles. Escolha pelo que
+importa mais para você: controle total ou acesso de qualquer lugar.
 
 ---
 
@@ -144,6 +154,11 @@ Para usar outro lugar, defina `BRAIN_BANK_DATA_DIR`.
 | `salvar_memoria` | Cria ou atualiza uma memória (escrita atômica) |
 | `procurar` | Busca um termo no nome **e** no conteúdo de todas as memórias |
 | `apagar_memoria` | Remove uma memória em definitivo |
+
+O servidor entrega ao modelo, na conexão, um conjunto de instruções sobre
+**quando** usar cada ferramenta. É isso que faz a IA procurar antes de dizer
+que não sabe, e guardar o que é durável por conta própria — em vez de só agir
+quando você pede. Está em `INSTRUCTIONS`, em `src/brain_bank/server.py`.
 
 ### Na prática
 
