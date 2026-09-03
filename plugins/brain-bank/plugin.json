@@ -1,6 +1,6 @@
 {
   "name": "brain-bank",
-  "description": "Memoria persistente local em markdown para qualquer IA via MCP. Nunca mais comece uma conversa do zero.",
+  "description": "Memória persistente local em markdown para qualquer IA via MCP. Nunca mais comece uma conversa do zero.",
   "version": "0.3.0",
   "author": {
     "name": "Jorge",
@@ -9,5 +9,14 @@
   "homepage": "https://github.com/jorge13en-droid/Brain-Bank-MCP",
   "repository": "https://github.com/jorge13en-droid/Brain-Bank-MCP",
   "license": "MIT",
-  "keywords": ["memoria", "memory", "mcp", "contexto", "markdown"]
+  "keywords": [
+    "brain-bank",
+    "memoria",
+    "memoria-persistente",
+    "memory",
+    "persistent-memory",
+    "mcp",
+    "contexto",
+    "markdown"
+  ]
 }

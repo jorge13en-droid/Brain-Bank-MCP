@@ -5,14 +5,14 @@
     "email": "jorge13en@gmail.com"
   },
   "metadata": {
-    "description": "Memoria persistente local para IA, em markdown.",
+    "description": "Memória persistente local para IA, em markdown.",
     "version": "1.0.0"
   },
   "plugins": [
     {
       "name": "brain-bank",
       "source": "./plugins/brain-bank",
-      "description": "Memoria persistente em markdown para qualquer IA via MCP. Nunca mais comece uma conversa do zero."
+      "description": "Memória persistente local em markdown para qualquer IA via MCP. Nunca mais comece uma conversa do zero."
     }
   ]
 }
