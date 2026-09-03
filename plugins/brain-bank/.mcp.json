@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "brain-bank": {
+      "command": "uvx",
+      "args": ["brain-bank-mcp"]
+    }
+  }
+}

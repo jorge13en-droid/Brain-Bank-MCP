@@ -8,12 +8,11 @@
 .dev.vars
 
 # ---------------------------------------------------------------
-# Memorias pessoais - o conteudo de /data e privado.
-# Apenas a estrutura de pastas (.gitkeep) vai para o repositorio.
+# Memorias pessoais. O padrao e ~/BrainBank, fora do repositorio,
+# mas se alguem apontar BRAIN_BANK_DATA_DIR para ./data a regra
+# abaixo garante que nada pessoal vaze para o git.
 # ---------------------------------------------------------------
-/data/**
-!/data/**/
-!/data/**/.gitkeep
+/data/
 
 # ---------------------------------------------------------------
 # Python

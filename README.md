@@ -1,12 +1,15 @@
 <div align="center">
 
-# 🧠 Brain Bank MCP
+<img src="imagens/brain-bank-banner.jpg" alt="Brain Bank" width="620">
+
+# Brain Bank MCP
 
 **Nunca mais comece uma conversa com IA do zero.**
 
 Memória persistente para qualquer modelo, via [Model Context Protocol](https://modelcontextprotocol.io).
 
 [![CI](https://github.com/jorge13en-droid/Brain-Bank-MCP/actions/workflows/ci.yml/badge.svg)](https://github.com/jorge13en-droid/Brain-Bank-MCP/actions/workflows/ci.yml)
+[![PyPI](https://img.shields.io/pypi/v/brain-bank-mcp.svg)](https://pypi.org/project/brain-bank-mcp/)
 [![Python 3.10+](https://img.shields.io/badge/python-3.10%2B-blue.svg)](https://www.python.org/downloads/)
 [![MCP](https://img.shields.io/badge/MCP-compatible-8A2BE2.svg)](https://modelcontextprotocol.io)
 [![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
@@ -43,19 +46,29 @@ Sem banco de dados. Sem nuvem. Sem lock-in — é uma pasta de markdown.
 
 ## Instalação
 
-```bash
-git clone https://github.com/jorge13en-droid/Brain-Bank-MCP.git
-cd Brain-Bank-MCP
-
-python -m venv venv
-source venv/bin/activate        # Windows: venv\Scripts\activate
-
-pip install -e .
-```
-
 Requer **Python 3.10+**. Compatível com o SDK `mcp` 1.x (`FastMCP`) e 2.x (`MCPServer`).
 
-### Conectando ao Claude Desktop
+### Opção 1 — plugin (mais rápido)
+
+No Claude Code:
+
+```
+/plugin marketplace add jorge13en-droid/Brain-Bank-MCP
+/plugin install brain-bank@brain-bank
+```
+
+No Grok Build:
+
+```bash
+grok plugin marketplace add jorge13en-droid/Brain-Bank-MCP
+grok plugin install brain-bank --trust
+```
+
+O plugin traz o servidor MCP e uma skill que ensina a IA a usar as memórias.
+Requer o [uv](https://docs.astral.sh/uv/) instalado — é ele que baixa e roda o
+servidor, sem clone e sem `pip install`.
+
+### Opção 2 — Claude Desktop
 
 Abra `claude_desktop_config.json` e adicione:
 
@@ -63,9 +76,8 @@ Abra `claude_desktop_config.json` e adicione:
 {
   "mcpServers": {
     "brain-bank": {
-      "command": "C:/caminho/para/Brain-Bank-MCP/venv/Scripts/python.exe",
-      "args": ["-m", "brain_bank"],
-      "cwd": "C:/caminho/para/Brain-Bank-MCP"
+      "command": "uvx",
+      "args": ["brain-bank-mcp"]
     }
   }
 }
@@ -78,9 +90,47 @@ O arquivo fica em:
 | Windows | `%APPDATA%\Claude\claude_desktop_config.json` |
 | macOS   | `~/Library/Application Support/Claude/claude_desktop_config.json` |
 
-Em macOS ou Linux, troque `venv/Scripts/python.exe` por `venv/bin/python`.
-
 Reinicie o Claude Desktop. O ícone de ferramentas deve mostrar `brain-bank`.
+
+Sem o `uv`? Use `pipx install brain-bank-mcp` e troque o comando por
+`brain-bank-mcp`, sem `args`.
+
+### Opção 3 — do código-fonte
+
+```bash
+git clone https://github.com/jorge13en-droid/Brain-Bank-MCP.git
+cd Brain-Bank-MCP
+
+python -m venv venv
+source venv/bin/activate        # Windows: venv\Scripts\activate
+
+pip install -e .
+```
+
+E aponte a configuração para o python do venv:
+
+```json
+{
+  "mcpServers": {
+    "brain-bank": {
+      "command": "/caminho/para/Brain-Bank-MCP/venv/bin/python",
+      "args": ["-m", "brain_bank"]
+    }
+  }
+}
+```
+
+No Windows, `venv\Scripts\python.exe`.
+
+---
+
+## Onde ficam as memórias
+
+Em **`~/BrainBank`** — na sua pasta de usuário, não junto do código. Assim elas
+sobrevivem a atualizações, reinstalações e à troca de máquina, e você pode fazer
+backup ou versionar essa pasta num repositório privado seu.
+
+Para usar outro lugar, defina `BRAIN_BANK_DATA_DIR`.
 
 ---
 
@@ -131,15 +181,16 @@ Copie `.env.example` para `.env`. Todas as variáveis são opcionais.
 
 | Variável | Padrão | Descrição |
 | -------- | ------ | --------- |
-| `BRAIN_BANK_DATA_DIR` | `./data` | Onde as memórias são gravadas |
+| `BRAIN_BANK_DATA_DIR` | `~/BrainBank` | Onde as memórias são gravadas |
 | `BRAIN_BANK_MAX_MEMORY_KB` | `512` | Tamanho máximo de uma memória |
 
 ---
 
 ## Privacidade
 
-- **O conteúdo de `data/` não é versionado.** O `.gitignore` mantém só a
-  estrutura de pastas — suas memórias nunca sobem para o GitHub por acidente.
+- **As memórias ficam fora do repositório**, em `~/BrainBank`. Não há como
+  subirem para o GitHub por acidente, e o `.gitignore` ainda bloqueia `data/`
+  como rede de segurança para quem apontar `BRAIN_BANK_DATA_DIR` para lá.
 - **`.env` não é versionado.** Use `.env.example` como referência.
 - Nomes de arquivo passam por `slugify()` antes de virarem caminho, então
   entrada como `../../etc/passwd` não escapa da pasta de dados. Há teste para isso.
@@ -156,7 +207,8 @@ Brain-Bank-MCP/
 │   ├── storage.py             # lógica de disco (sem dependência de MCP)
 │   └── server.py              # camada MCP: as ferramentas
 ├── tests/                     # pytest
-├── data/                      # suas memórias (conteúdo ignorado pelo git)
+├── plugins/brain-bank/        # o plugin (Claude Code e Grok Build)
+├── .claude-plugin/            # marketplace.json, para instalar do GitHub
 ├── server.py                  # atalho: python server.py
 └── pyproject.toml
 ```

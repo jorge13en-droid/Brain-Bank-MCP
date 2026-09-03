@@ -15,6 +15,10 @@ Nao ha frontend neste repositorio.
 - `src/brain_bank/server.py` - apenas a camada MCP (as ferramentas `@mcp.tool()`).
 - `tests/` - pytest, sem tocar em disco real (usa `tmp_path`).
 - `server.py` na raiz - atalho de compatibilidade, nao coloque logica ali.
+- `plugins/brain-bank/` - o plugin (Claude Code e Grok Build). O `.mcp.json`
+  roda o servidor via `uvx brain-bank-mcp`, entao o plugin depende do pacote
+  publicado no PyPI, nao do codigo desta pasta.
+- `.claude-plugin/marketplace.json` - obrigatorio para instalar do GitHub.
 
 ## Regras
 
@@ -23,6 +27,10 @@ Nao ha frontend neste repositorio.
 2. Nomes de arquivo passam sempre por `slugify()`. Nunca monte um caminho
    concatenando entrada do usuario direto.
 3. Erros previsiveis usam `BrainBankError`; a camada MCP converte em texto.
-4. Nunca versione `.env` nem o conteudo de `data/` - sao dados pessoais.
+4. Nunca versione `.env` nem memorias. O padrao de gravacao e `~/BrainBank`,
+   fora do repositorio - nao mude isso para um caminho relativo ao codigo,
+   porque some no cache do uvx a cada atualizacao.
 5. Antes de commitar: `ruff check . && ruff format --check . && pytest`.
 6. As ferramentas MCP tem nomes em portugues por decisao de produto. Mantenha.
+7. Ao mexer na versao, edite so `src/brain_bank/__init__.py`: o `pyproject.toml`
+   le dali. Mantenha em sincronia com `plugins/brain-bank/plugin.json`.

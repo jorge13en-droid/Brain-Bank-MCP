@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "brain-bank-mcp"
-version = "0.2.0"
+dynamic = ["version"]
 description = "Servidor MCP que da memoria persistente para qualquer IA."
 readme = "README.md"
 requires-python = ">=3.10"
@@ -31,6 +31,9 @@ brain-bank-mcp = "brain_bank.server:main"
 [project.urls]
 Homepage = "https://github.com/jorge13en-droid/Brain-Bank-MCP"
 Issues = "https://github.com/jorge13en-droid/Brain-Bank-MCP/issues"
+
+[tool.hatch.version]
+path = "src/brain_bank/__init__.py"
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/brain_bank"]

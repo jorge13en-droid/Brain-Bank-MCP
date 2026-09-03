@@ -19,7 +19,9 @@ FOLDERS: dict[str, str] = {
     "fonte": "Documentos brutos e material de referencia",
 }
 
-DEFAULT_DATA_DIR = Path(__file__).resolve().parents[2] / "data"
+# As memorias ficam na pasta do usuario, e nao ao lado do codigo: assim
+# sobrevivem a atualizacoes do pacote, a reinstalacoes e ao cache do uvx.
+DEFAULT_DATA_DIR = Path.home() / "BrainBank"
 DEFAULT_MAX_MEMORY_KB = 512
 
 

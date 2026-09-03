@@ -1,0 +1,54 @@
+name: Publicar no PyPI
+
+# Dispara ao criar uma release no GitHub (ou manualmente).
+# A autenticacao usa Trusted Publishing (OIDC): nao existe token
+# guardado no repositorio.
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Construir o pacote
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Construir sdist e wheel
+        run: |
+          python -m pip install --upgrade pip build
+          python -m build
+
+      - name: Conferir os metadados
+        run: |
+          pip install twine
+          twine check dist/*
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: dist
+          path: dist/
+
+  publish:
+    name: Publicar no PyPI
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: pypi
+      url: https://pypi.org/p/brain-bank-mcp
+    permissions:
+      id-token: write # exigido pelo Trusted Publishing
+
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: dist
+          path: dist/
+
+      - name: Enviar para o PyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
