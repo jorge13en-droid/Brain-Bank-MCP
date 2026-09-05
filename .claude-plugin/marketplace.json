@@ -11,7 +11,7 @@
   "plugins": [
     {
       "name": "brain-bank",
-      "source": "./plugins/brain-bank",
+      "source": "./",
       "description": "Memória persistente local em markdown para qualquer IA via MCP. Nunca mais comece uma conversa do zero."
     }
   ]

@@ -15,10 +15,14 @@ Nao ha frontend neste repositorio.
 - `src/brain_bank/server.py` - apenas a camada MCP (as ferramentas `@mcp.tool()`).
 - `tests/` - pytest, sem tocar em disco real (usa `tmp_path`).
 - `server.py` na raiz - atalho de compatibilidade, nao coloque logica ali.
-- `plugins/brain-bank/` - o plugin (Claude Code e Grok Build). O `.mcp.json`
-  roda o servidor via `uvx brain-bank-mcp`, entao o plugin depende do pacote
-  publicado no PyPI, nao do codigo desta pasta.
-- `.claude-plugin/marketplace.json` - obrigatorio para instalar do GitHub.
+- O repositorio E o plugin: `.mcp.json`, `skills/` e `plugin.json` ficam na
+  raiz. O catalogo do Grok (xai-org/plugin-marketplace) so aceita fonte `url`
+  apontando para a raiz do repo, sem subpasta - por isso nao usamos
+  `plugins/<nome>/`. Nao mova esses arquivos para uma subpasta.
+- O `.mcp.json` roda o servidor via `uvx brain-bank-mcp`: o plugin depende do
+  pacote publicado no PyPI, nao do codigo desta pasta.
+- `.claude-plugin/plugin.json` e o manifesto do Claude Code; `plugin.json` na
+  raiz e o formato nativo do Grok. Mantenha os dois em sincronia.
 
 ## Regras
 

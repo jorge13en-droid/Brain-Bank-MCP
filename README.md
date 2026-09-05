@@ -74,7 +74,8 @@ grok plugin marketplace add jorge13en-droid/Brain-Bank-MCP
 grok plugin install brain-bank --trust
 ```
 
-O plugin traz o servidor MCP e uma skill que ensina a IA a usar as memórias.
+O repositório é o próprio plugin: traz o servidor MCP e uma skill que ensina
+a IA a usar as memórias.
 Requer o [uv](https://docs.astral.sh/uv/) instalado — é ele que baixa e roda o
 servidor, sem clone e sem `pip install`.
 
@@ -222,8 +223,9 @@ Brain-Bank-MCP/
 │   ├── storage.py             # lógica de disco (sem dependência de MCP)
 │   └── server.py              # camada MCP: as ferramentas
 ├── tests/                     # pytest
-├── plugins/brain-bank/        # o plugin (Claude Code e Grok Build)
-├── .claude-plugin/            # marketplace.json, para instalar do GitHub
+├── .mcp.json                  # o plugin: servidor MCP
+├── skills/brain-bank/         # o plugin: skill que ensina a IA a usar
+├── .claude-plugin/            # manifesto + marketplace.json
 ├── server.py                  # atalho: python server.py
 └── pyproject.toml
 ```
